@@ -7,13 +7,13 @@ For more details see [our module page on the SISMID website](https://si.biostat.
 
 ### Schedule
 
-The module schedule will be posted here shortly. <!---[schedule for the module is available here](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/Mod4_schedule.pdf).-->
+The schedule is [available here](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/Mod10_schedule.pdf).
 
 ### Things to know
 
 - The module will be delivered through a combination of pre-recorded video lectures and live sessions. The best option is to follow along in sync with the schedule. However, we realize that some of you are in time zones where this is more difficult, so we have tried to design the course such that you can make adjustments if need be. All live sessions will be recorded and made available to module participants.
 
-- Most organization will be done through our module Slack channel; here you will find the live session and recording links. Please email us or SISMID if you have not been added to the Slack by the start of the course. We will also have a second channel, #m10_questions_answers, for you to post questions about any of the module content. We'll be answering these questions during the 'Open work and discussion' sessions (see below).
+- Most organization will be done through our module Slack channel; here you will find the live session and recording Zoom links. Please email us or SISMID if you have not been added to the Slack by the start of the course. We will also have a second channel, #m10_questions_answers, for you to post questions about any of the module content. We'll be answering these questions during the 'Open work and discussion' sessions (see below).
 
 - We will have the Zoom meeting open ~15 minutes before and after each scheduled day, if you want to come and chat with your fellow participants. The meeting will also remain open during all of the breaks.
 
@@ -24,13 +24,9 @@ The module schedule will be posted here shortly. <!---[schedule for the module i
 
 All computational exercises in this module will use R and Rstudio.
 
-If you've never used R before, we have created a tutorial for you to work through in advance of the course. If you've already done a tutorial for one of the other SISMID modules or otherwise, that will be fine too. 
+If you've never used R before, we have created a tutorial for you to work through in advance of the course. If you've already done a tutorial for one of the other SISMID modules or otherwise, that will be fine too. You can access the tutorial here: [An Introduction to R and RStudio](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/R_tutorial.html).
 
-You can access the tutorial here: [An Introduction to R and RStudio](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/R_tutorial.html).
-
-We have also created a short second R tutorial which walks you through installing all of the packages we'll be using during the module. Please work through this in advance of the course. If you have any problems, feel free to drop us a message on Slack.
-
-The second tutorial can be accessed here: [Installation and preparation instructions](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/R_tutorial2.html). **Note: everyone should do this one!**
+We have also created a short second R tutorial which walks you through installing all of the packages we'll be using during the module. Please work through this in advance of the course. If you have any problems, feel free to drop us a message on Slack. The second tutorial can be accessed here: [Installation and preparation instructions](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/R_tutorial2.html). **Note: everyone should do this one!**
 
 ### Exercise materials - coming soon
 
