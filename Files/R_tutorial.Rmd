@@ -8,7 +8,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Preparing for SISMID 2021 Module 4
+## Preparing for SISMID 'Reconstructing transmission with genomic data'
 
 There are lots of great tutorials for R and RStudio available online. Here we have collated an introduction that will be relevant for our course, in which we will refer a lot to this comprehensive Introduction to R tutorial at [r-tutor.com](http://www.r-tutor.com/r-introduction).
 
@@ -346,7 +346,7 @@ rnorm(5)
 
 ## Loading data; getting your R session in the right directory
 
-You can read files into R from any directory using a command like `read.csv("C:/MyFolder/MyFile.csv)` for .csv files, `read.table(...)` for .txt files and so on. But it can be annoying to type the whole file path every time, particularly if your files are buried inside lots of folders. A good solution is to put all your data, code etc. for your project in one folder (let's say it's "C:/MyAccount/Documents/SISMID2021" for argument's sake) and then use `setwd("C:\MyAccount\Documents\SISMID2021")`. This sets the SISMID2021 folder as your 'working directory', and now to load or save any files in the folder, you only need to use `read.csv("MyFile.csv)`. 
+You can read files into R from any directory using a command like `read.csv("C:/MyFolder/MyFile.csv)` for .csv files, `read.table(...)` for .txt files and so on. But it can be annoying to type the whole file path every time, particularly if your files are buried inside lots of folders. A good solution is to put all your data, code etc. for your project in one folder (let's say it's "C:/MyAccount/Documents/SISMID2021") and then use `setwd("C:\MyAccount\Documents\SISMID2021")`. This sets the SISMID2021 folder as your 'working directory', and now to load or save any files in the folder, you only need to use `read.csv("MyFile.csv)`. 
 
 (1) Check what your current working directory is using the command `getwd()`. If it's not the folder you want it to be, set it using `setwd("<your file path here>")`. 
 
