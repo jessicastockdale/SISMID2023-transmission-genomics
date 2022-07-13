@@ -46,7 +46,7 @@ Data for exercises 2,3,4: [TB data](https://jessicastockdale.github.io/SISMID202
 
 Here you will be able to find the pre-recorded video lectures. Live Zoom lectures (see schedule) will be recorded and posted to Slack. 
 
-Lecture 2:
+<!---Lecture 2:
 {% include youtubePlayer.html id="eLe-AUyaDxY" %} 
 
 Lecture 3:
@@ -56,7 +56,7 @@ Lecture 4:
 {% include youtubePlayer.html id="TgZX12gfcYk" %} 
 
 Lecture 5:
-{% include youtubePlayer.html id="3FeR46lzwqY" %} 
+{% include youtubePlayer.html id="3FeR46lzwqY" %} -->
 
 
 ### Lecture slides -coming soon
