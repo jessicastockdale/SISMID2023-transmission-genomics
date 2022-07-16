@@ -108,7 +108,7 @@ The `plot` command will recognize various `type=` arguments for plotting `outbre
 ```{r}
 # Who-infected-who; the size of the dot pertains to the inferred probability that that person (row) was the infector of each case (column):
 plot(result, type = "alpha", burnin = 1000)
-# Distribtion of the inferred infection time of each case:
+# Distribution of the inferred infection time of each case:
 plot(result, type = "t_inf", burnin = 1000)
 # How many generations were there between cases? Size of dot = probability again. E.g. 1 generation = no unsampled cases, sampled ancestor -> sampled descendant. 2 generations = 1 unsampled case, sampled ancestor -> unsampled ancestor -> sampled descendant.
 plot(result, type = "kappa", burnin = 1000)
@@ -128,20 +128,20 @@ This summary provides:
 
 *`$step`: a recap of which steps in the MCMC were used to create the summary
 *`$post`, `$like`, `$prior`, `$mu`, `$pi`: distributional stats for these quantities
-*`$tree`: a consensus tree, that is, a tree made up of the most frequent infector/infectee pairs among your MCMC samples. The `support` column tells you the percentage of samples trees which that pair occurred in, and `generations` is the most frequent value of `kappa` among those trees. 
+*`$tree`: a consensus tree, that is, a tree made up of the most frequent infector/infectee pairs among your MCMC samples. The `support` column tells you the percentage of sampled trees which that pair occurred in, and `generations` is the most frequent value of `kappa` among those trees. 
 
 
 ## Your own analysis: TB and COVID-19
 
-We have 2 datasets prepared for you to work with in this exercise, and we will also be revisiting them in later exercises. You probably won't have time to finish working on both datasets by the end of this session, that's ok, and feel free to keep working on them later (or during the open work sessions).
+We have 2 datasets prepared for you to work with in this exercise, and we will also be revisiting them in later exercises. You may well not have time to finish working on both datasets by the end of this session: that's ok! Feel free to keep working on them later (or during the open work sessions), and post any questions on Slack.
 
-1. Download the Tuberculosis dataset from the module webpage and/or the COVID-19 dataset from the Slack channel.
+1. Download the tuberculosis dataset from the module webpage and/or the COVID-19 dataset from the Slack channel.
 
-The first dataset consists of 86 genomes from an outbreak of tuberculosis in Hamburg, Germany during the late 1990s/early 2000s. You can read more about the outbreak here: https://doi.org/10.1371/journal.pmed.1001387 (or on ResearchGate [here](https://www.researchgate.net/publication/235670540_Whole_Genome_Sequencing_versus_Traditional_Genotyping_for_Investigation_of_a_Mycobacterium_tuberculosis_Outbreak_A_Longitudinal_Molecular_Epidemiological_Study)). TB is caused by a slow-growing bacterium Mycobacterium tuberculosis, and outbreaks can be hard to recreate using epidemiological information alone since they often occur over long time frames and ‘can occur during short contacts or in high risk populations (e.g., homeless or alcoholic populations)). These 86 genomes belong to the largest strain cluster identified in Hamburg/Schleswig-Holstein from 1997-2010. 
+The first dataset consists of 86 genomes from an outbreak of tuberculosis (TB) in Hamburg, Germany during the late 1990s/early 2000s. You can read more about the outbreak here: https://doi.org/10.1371/journal.pmed.1001387 (or on ResearchGate [here](https://www.researchgate.net/publication/235670540_Whole_Genome_Sequencing_versus_Traditional_Genotyping_for_Investigation_of_a_Mycobacterium_tuberculosis_Outbreak_A_Longitudinal_Molecular_Epidemiological_Study)). TB is caused by a slow-growing bacterium, Mycobacterium tuberculosis, and outbreaks can be hard to recreate using epidemiological information alone since they often occur over long time frames and ‘can occur during short contacts or in high risk populations (e.g., homeless or alcoholic populations)'. These 86 genomes belong to the largest strain cluster identified in Hamburg/Schleswig-Holstein from 1997-2010. 
 
-The second dataset consists of 40 SARS-CoV-2 genomes from the UK, specifically from the B.1.13 lineage. They were collected during March and April 2020. They were collected by the COG Consortium UK https://www.cogconsortium.uk/.
+The second dataset consists of 40 early SARS-CoV-2 genomes from the UK, specifically from the B.1.13 lineage. They were collected during March and April 2020, by the COG Consortium UK https://www.cogconsortium.uk/.
 
-Both datasets include aligned sequences in a .fasta file and dates of sampling in a .csv (SARS-CoV-2) or .txt (TB). The SARS-CoV-2 csv also includes some additional metadata, though we won't be using it in this analysis. 
+Both datasets include aligned sequences in a .fasta file and dates of sampling in a .csv (SARS-CoV-2) or .txt (TB) file. The SARS-CoV-2 csv also includes some additional metadata, though we won't be using it in this analysis. 
 
 
 2. **Your task is to use outbreaker2 to infer transmission networks for the TB and/or SARS-CoV-2 outbreaks.** Repeat the analysis we did for the fake outbreak. Loading the data and setting up outbreaker will require a couple of extra steps, some guidance on this is below. See also the 'Hints, tips and common issues' section. 
@@ -152,10 +152,10 @@ Both datasets include aligned sequences in a .fasta file and dates of sampling i
 
 2c) When you read in the metadata, R will assume the date columns are character vectors unless you tell it otherwise. You can do this with the `as.Date` function e.g. `as.Date(yourdatesvector)`. Note: the TB dates are provided in the same order as the sequence file. 
 
-*Important!* One of the trickier things in setting up outbreaker is making sure you input data on a suitable timescale. Outbreaker2 assumes transmission cannot occur over a time of <1 unit of whatever timescale you use - so you should choose a timescale that is suitably small. But, choose a scale which is too small and your analysis will take ages to run. For the TB data, we suggest converting everything to months (for the COVID-19 data we suggest keeping the default timescale of days, so you don't need to do anything). Here is some code you can use to convert the TB data to months: 
+*Important!* One of the trickier things in setting up outbreaker is making sure you input data on a suitable timescale. Outbreaker2 assumes transmission cannot occur over a time of <1 unit of whatever timescale you use - so you should choose a timescale that is suitably small. But, choose a scale that is too small and your analysis will take ages to run. For the TB data, we suggest converting everything to months (for the COVID-19 data we suggest keeping the default timescale of days, so you don't need to do anything). Here is some code you can use to convert the TB data to months: 
 
 ```{r, echo=FALSE}
-dates <- read.table(file="tb_data/roetzer_dates.txt")
+dates <- read.table(file="roetzer_dates.txt")
 dates <- as.Date(dates[,1])
 ```
 
@@ -182,7 +182,7 @@ my_config <- create_config(n_iter = 100)
 
 ## Extension tasks and additional reading
 
-A. To learn more about customizing the likelihood, priors and moves used in outbreaker2, check out the tutorial https://www.repidemicsconsortium.org/outbreaker2/articles/customisation.html. You could try this out with the TB/COVID data. 
+A. To learn more about customizing the likelihood, priors and moves used in outbreaker2, check out the tutorial https://www.repidemicsconsortium.org/outbreaker2/articles/customisation.html. You could try this out with the TB/COVID data. For example, what if I told you that I think the reporting rate in both these outbreaks is around 30%, but that there's no way it's above 80%?
 
 B. You can read more about outbreaker2 and outbreaker (the original package which outbreaker2 extends upon) at https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/s12859-018-2330-z (Campbell et al, 2017) and https://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1003457&type=printable (Jombart et al, 2014)
 

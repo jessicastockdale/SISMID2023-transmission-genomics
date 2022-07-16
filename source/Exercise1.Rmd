@@ -14,13 +14,13 @@ In your groups, you’ll be exploring an example of the kind of dataset we might
 
 This is an open-ended task, and we’re happy for you to approach it any way you choose. You could try to recreate the transmission network/tree by hand, sketch out a plan or some pseudo-code for an automated way to do this, start to code up some analysis, or something else entirely. The important thing here is to start thinking about possible approaches and difficulties for transmission inference, and how we can combine various sources of information to best predict the route an outbreak took.
 
-You have ~35 minutes for this exercise. At 1:15 we will rejoin the main zoom channel for a wrap-up. At least 1 member of your team should be prepared to give a 1 minute summary of your group’s work.
+You have ~45 minutes for this exercise. Then, for the final 10-15 minutes we will rejoin the main zoom channel for a wrap-up. At least 1 member of your team should be prepared to give a 1 minute summary of your group’s work.
 
 # First steps
 1. Introduce yourselves.
 2. Assign roles from the list below - these don’t have to be formal but might help keep things on track.
 3. Download the data from the main module webpage
-4. Open up the data (in R, in a text reader, in Excel, wherever you prefer) and get exploring! The data dictionary file is probably a good place to start
+4. Open up the data (in R, in a text reader, in Excel, wherever you prefer) and get exploring! The data dictionary file is a good place to start.
 
 # Roles:
 Moderator - helps facilitate the conversation; a “project manager” 

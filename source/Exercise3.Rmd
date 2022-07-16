@@ -6,7 +6,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "C:/Users/jesto/sfuvault/SISMID2021/Flu_data")
+knitr::opts_knit$set(root.dir = "C:/Users/jesto/sfuvault/SISMID/SISMID2022/Flu_data")
 ```
 
 # Reconstructing phylogenetic trees
@@ -128,7 +128,7 @@ There are many ways to customize phylogeny plots to display additional data and/
  # If you find that your legend is obstructing the tree, you can try changing the legend size (cex) or the legend position ("topright")
 ```
 
-Notice in the above figure that the x-axis does NOT correspond to ancestry through time. This is because we have plotted an unrooted tree i.e. we did not provide the ``nj`` algorithm with a taxon defined as the 'most ancient' split in the tree to root it by. When plotting unrooted trees, it is best clearly display them as such - to do this you can add ``type = "unrooted"`` to the plot command. In the below figure, the tree is no longer arranged left->right and so it's more obvious that you are showing an unrooted tree.
+Notice in the above figure that the x-axis does NOT correspond to ancestry through time. This is because we have plotted an unrooted tree i.e. we did not provide the ``nj`` algorithm with a taxon defined as the 'most ancient' split in the tree to root it by. When plotting unrooted trees, it is best to clearly display them as such - to do this you can add ``type = "unrooted"`` to the plot command. In the below figure, the tree is no longer arranged left->right and so it's more obvious that you are showing an unrooted tree.
 
 ```{r}
 is.rooted(my_tree)
@@ -170,7 +170,7 @@ There are a wide range of other approaches than ``nj`` available for building ph
 
 Task (iii): estimating a molecular clock
 
-Rooted trees, such as the one we just made, can be used to estimate rates of evolution. Unlike a regular clock which measures the passing of seconds, minutes or hours, a 'molecular clock' measures the accumulation of genetic mutations over time. To estimate the clock rate of our rooted tree, we can perform a regression over all tips of the number of mutations from the root against the time since the root.
+Rooted trees, such as the one we just made, can be used to estimate rates of evolution. Unlike a regular clock which measures the passing of seconds, minutes or hours, a 'molecular clock' measures the accumulation of genetic mutations. To estimate the clock rate of our rooted tree, we can perform a regression over all tips of the number of mutations from the root against the time since the root.
 
 9. Estimate the clock rate of your rooted influenza tree
 
@@ -202,7 +202,7 @@ The coefficient of `yearFromRoot` is ~7.7. This is our estimate of the number of
 
 An alternative to distance-based phylogenies is maximum parsimony phylogenies.
 
-In general terms, the scientific principle of parsimony can be described as the idea that the simplest explanation that can explain the data is  preferred. Maximum parsimony phylogenetic reconstruction therefore seeks trees which minimize the number of evolutionary changes (substitutions) between ancestor and descendant. This makes for a simple and easy-to-motivate methodology, which is most appropriate for sequences with low divergence i.e. most sequences are very similar to one another.  
+In general terms, the scientific principle of parsimony can be described as a belief that the best explanation of your data is equal to the simplest possible explanation that is consistent with that data. Maximum parsimony phylogenetic reconstruction therefore seeks trees which minimize the number of evolutionary changes (substitutions) between ancestor and descendant. This makes for a simple and easy-to-motivate methodology, which is most appropriate for sequences with low divergence i.e. most sequences are very similar to one another.  
 
 In an ideal world we would search over the space of all possible trees to find the one which is most parsimonious. However, in reality this is usually computationally impossible unless you have very few tips in your tree. Many algorithms have been designed to instead search broadly over this space in a clever way - to try and find a decently parsimonious tree without needing to check too many. These algorithms generally take a strategy of (1) pick an initial tree and calculate it's parsimony, (2) propose some small changes to the tree and calculate the new tree's parsimony, (3) keep the new tree if it leads to a better parsimony, and (4) repeat until the parsimony score stops improving. 
 
@@ -212,7 +212,7 @@ phangorn. It requires a tree (in ape's format, i.e. a phylo object) and the
 original DNA sequences in phangorn's own format, phyDat. We convert the
 data and generate a tree to initialize the method:
 
-10. Create a maximum parsimony tree for the US flu data using the package ``phangorn``. This requires an initial tree (you can use ``ape`` to make this, as in the previous section) as well as the original DNA sequences, which must be converted to ``phangorn``'s ``phyDat`` format, as follows:
+10. Create a maximum parsimony tree for the US flu data using the package ``phangorn``. This requires an initial tree (you can use ``ape`` to make a neighbor-joining tree for this, as in the previous section) as well as the original DNA sequences, which must be converted to ``phangorn``'s ``phyDat`` format, as follows:
 
 ```{r}
 seqs2 <- as.phyDat(seqs)
@@ -250,7 +250,7 @@ legend("topright", fill = transp(num2col(temp, col.pal = myPal),
 
 Our final phylogenetic tree building approach is maximum likelihood. The idea here is very similar to maximum parsimony, in that we try to search over the space of all possible trees in a smart way to find the 'best' one, but this time we want to maximize some pre-defined likelihood function rather than maximizing parsimony.
 
-A big benefit of this approach is that the likelihood to be maximized can be defined by any model of sequence evolution we choose, which makes it much more flexible. As well as optimizing over the space of trees, we can also simultaneously optimize over the parameters of our chosen model - to find the best tree and the best model parameters at the same time. A drawback, however, is that this means we need to decide what is the most appropriate to use!
+A big benefit of this approach is that the likelihood to be maximized can be defined by any model of sequence evolution we choose, which makes it much more flexible. As well as optimizing over the space of trees, we can also simultaneously optimize over the parameters of our chosen model - to find the best tree and the best model parameters at the same time. A drawback, however, is that this means we need to decide what is the most appropriate model to use!
 
 A common choice is the GTR + $\Gamma$(4) model (GTR = global reversible time). In this model, all possible substitutions (all transitions, transversions) are allowed to have different rates as well as the substitution rate being allowed to vary across sites. 
 

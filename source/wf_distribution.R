@@ -13,7 +13,7 @@
 # For example, if the collection dates are provided at a daily resolution, then the
 # time scale is 1 day and a vector w_dens should be provided where the first element 
 # corresponds to the probability that the generation time is 1 day long, the second
-# element corresponds to the probability that the generation time is 2 days long etc. 
+# element corresponds to the probability that the generation time is 2 days long, etc. 
 # This vector should therefore sum to 1, or if it does not then outbreaker will 
 # scale it as such. 
 
@@ -23,7 +23,7 @@
 
 # The package EpiEstim has a really useful function for defining a vector like this, called
 # 'discr_si'. This package is actually nothing to do with our task here (though it is very 
-# useful! it's for inferring time-dependent reproduction numbers of outbreaks), but we will
+# useful! It's for inferring time-dependent reproduction numbers of outbreaks), but we will
 # use this one function.
 
 library(EpiEstim)                                                                                                                                                                                                                           
