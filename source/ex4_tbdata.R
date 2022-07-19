@@ -51,15 +51,18 @@ dateT
 # this in order to get better results - we should use our MCMC diagnostics to confirm if we have enough
 # iterations (trace plots, ESS)
 res<-inferTTree(ptree,mcmcIterations=5000,w.shape=w.shape,w.scale=w.scale,
-                ws.shape=ws.shape,ws.scale=ws.scale, dateT=dateT, startPi=0.9, 
+                ws.shape=ws.shape,ws.scale=ws.scale, dateT=dateT, startPi=0.8, 
                 updatePi=F, updateNeg = TRUE)
 # We can turn on/off the estimation of different parameters depending on how good the
-# estimation is, and what we are interested to learn/how much prior knowledge we have
-# I have turned off updating Pi here (but you could update it)
+# estimation is, and what we are interested to learn/how much prior knowledge we have.
+# I have turned off updating Pi here - but you could update it. For this analysis, where we 
+# don't have a good idea of the true sampling rate, I would definitely want to turn the pi
+# update on once I'm confident the rest of my analysis is working as intended
 
 plot(res)
-# For just 5000 iterations the mixing of the posterior and R looks alright, but I would run this 
-# for longer to get better estimates of Ne*g. Note that the pi plot is flat because we don't update pi.
+# For 5000 iterations the mixing of the posterior looks alright, but I would run this 
+# for longer to get better estimates of Ne*g and R. Note that the pi plot is flat because we don't 
+# update pi (updatePi=F).
 mcmc=convertToCoda(res)
 effectiveSize(mcmc)
 # Yes, the effective sample size of Neg is low as the trace plots suggested. 
@@ -67,7 +70,7 @@ effectiveSize(mcmc)
 # Get the medoid tree
 med=medTTree(res)
 plot(med)
-# We are getting a lot of unsampled cases near the tips, so we might want to increase dateT
+# We are getting a fair number of unsampled cases near the tips, so we might want to increase dateT
 
 # Plot the transmission tree of the medoid
 ttree=extractTTree(med)
@@ -136,7 +139,7 @@ hist(getTimesToSampling(med))
 
 # Get the number of unsampled cases in the medoid tree 
 getNumberUnsampled(med)
-# 26 unsampled cases compared to our 86 sampled
+# 44 unsampled cases compared to our 86 sampled
 
 
 

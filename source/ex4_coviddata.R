@@ -62,12 +62,14 @@ res<-inferTTree(ptree,mcmcIterations=5000,w.shape=w.shape,w.scale=w.scale,
                 ws.shape=ws.shape,ws.scale=ws.scale, dateT=dateT, startPi=0.9, updatePi=F)
 # We can turn on/off the estimation of different parameters depending on how good the
 # estimation is, and what we are interested to learn/how much prior knowledge we have
-# I have turned off updating Pi here and assumed relatively high sampling, but you could update it 
-# instead if you wish
+# I have turned off updating Pi here and assumed high sampling, but you could update it 
+# instead if you wish. For this analysis, where we don't have a good idea of the true sampling 
+# rate but it's probably quite low, I would definitely want to turn the pi update on once I'm 
+# confident the rest of my analysis is working as intended
 
 plot(res)
 # Even for just 5000 iterations the mixing looks fair. Note that the pi plot is flat 
-#because we don't update pi.
+#because we don't update pi (updatePi=F).
 mcmc=convertToCoda(res)
 effectiveSize(mcmc)
 # Th effective sample size of neg is low though - we should probably increase the number of iterations
