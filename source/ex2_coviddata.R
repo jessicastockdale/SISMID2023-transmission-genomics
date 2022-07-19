@@ -19,12 +19,14 @@ dates_B113 <- as.Date(date_B.1.13$sample_date)
 
 
 ## wdens and fdens
-#gen time ~ gamma(mean = 5.2 days, sd = 1.72 days), samp time ~ Weibull(shape = 1.73,  scale = 9.85) 
+# COVID-19:  generation time ~ gamma(mean = 5.2 days, sd = 1.72) days as estimated here https://doi.org/10.2807/1560-7917.ES.2020.25.17.2000257
+#            sampling time ~ gamma(mean = 5.2 days, sd = 1.72) days as well. 
 
 x<- seq(1, 15) # we truncate to a max of 15 days for both distributions
 
 w <- discr_si(x, mu = 5.2, sigma = 1.72)
 f <- discr_si(x, mu = 5.2, sigma = 1.72)
+
 
 #plot the generation/sampling time distributions
 col <- "#6666cc"
@@ -46,7 +48,7 @@ names(dates_B113) <- as.vector(date_B.1.13$sequence_name)
 #names(dates_B113) = labels(dna_B.1.13)
 
 seq_outbreaker_B.1.13 <- outbreaker_data(dates = dates_B113 , dna = dna_B.1.13, w_dens = w, f_dens = f)
-# we don't have any contact tracing data
+# we don't have any contact tracing data ctd
 
 # for testing, a configuration where we run very few iterations
 my_config <- create_config(n_iter = 100,
@@ -117,7 +119,7 @@ plot(res2, "mu", "density", burnin = 200) # no longer multi-modal, a good sign
 plot(res2, type = "alpha", burnin = 200) # lots of uncertainty in the pairs, but some have pretty good support
 plot(res2, type = "t_inf", burnin = 200) # these 'bumps' in t_inf suggest a problem though, this would need some investigation
 plot(res2, type = "kappa", burnin = 200) # now we see some unsampled cases
-plot(res2, type = "network", burnin = 200, min_support = 0.01) 
+plot(res2, type = "network", burnin = 200, min_support = 0.1) 
 summary(res2)
 
 # As we can see, it's hard to lock down definitive transmission pairs with real data, but we can start to get a sense of some potential ones

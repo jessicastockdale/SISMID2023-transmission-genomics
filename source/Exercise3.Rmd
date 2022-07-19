@@ -371,7 +371,12 @@ Remember that we don't expect you to finish the whole tutorial for all 3 dataset
 
 ## Extension tasks and additional reading
 
-A. Here are several alternatives to ``nj`` for building phylogenetic trees:
+A. The phylogenies we built above were not linked to time, though generally in transmission inference we have a time point associated with each sequence (e.g. the time of sampling). Check out the extension exercise linked from the module webpage for a tutorial on building timed trees.
+
+If you are already familiar with phylogenetic inference, but haven’t yet used or made timed trees, you can explore ‘treedater’ (an R package by Erik Volz https://github.com/emvolz/treedater) or the python package TreeTime https://github.com/neherlab/treetime by Richard Neher. 
+
+
+B. Here are several alternatives to ``nj`` for building phylogenetic trees:
 
 - ``bionj`` (``ape`` library): an improved version of Neighbor-Joining.
 
@@ -382,9 +387,8 @@ single linkage, complete linkage, UPGMA, and others.
 
 Test these packages for building a US flu data phylogeny and compare your results to that you obtained using ``nj``. (Remember to look up the documentation for each package using e.g. ``?bionj``). How different do your phylogenies look? Are the branches longer/shorter/differently clustered in some methods? See point B below for more formal methods for comparison of trees. 
 
-B. Development of methods for comparison of phylogenetic trees is an active area of research. Investigate the R packages ape and treespace, or look up alternatives, for ways to compare trees, and apply these to your TB/COVID trees. Here is a document about treespace that might be useful  https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html
+C. Development of methods for comparison of phylogenetic trees is an active area of research. Investigate the R packages ape and treespace, or look up alternatives, for ways to compare trees, and apply these to your TB/COVID trees. Here is a document about treespace that might be useful  https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html
 
-C. If you are already familiar with phylogenetic inference, but haven’t yet used or made timed trees, you can explore ‘treedater’ (an R package by Erik Volz https://github.com/emvolz/treedater) or the python package TreeTime https://github.com/neherlab/treetime by Richard Neher. 
 
 
 

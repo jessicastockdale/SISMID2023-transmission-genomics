@@ -646,15 +646,16 @@ legend(&quot;topright&quot;, fill = transp(num2col(temp, col.pal = myPal),
 <p>Remember that we don’t expect you to finish the whole tutorial for all 3 datasets within one 50 minute session. But hopefully you can make a good start, ask lots of questions, and then continue in the open work sessions or outside of our schedule if you want to.</p>
 <div id="extension-tasks-and-additional-reading" class="section level2">
 <h2>Extension tasks and additional reading</h2>
-<p>A. Here are several alternatives to <code>nj</code> for building phylogenetic trees:</p>
+<p>A. The phylogenies we built above were not linked to time, though generally in transmission inference we have a time point associated with each sequence (e.g. the time of sampling). Check out the extension exercise linked from the module webpage for a tutorial on building timed trees.</p>
+<p>If you are already familiar with phylogenetic inference, but haven’t yet used or made timed trees, you can explore ‘treedater’ (an R package by Erik Volz <a href="https://github.com/emvolz/treedater" class="uri">https://github.com/emvolz/treedater</a>) or the python package TreeTime <a href="https://github.com/neherlab/treetime" class="uri">https://github.com/neherlab/treetime</a> by Richard Neher.</p>
+<p>B. Here are several alternatives to <code>nj</code> for building phylogenetic trees:</p>
 <ul>
 <li><p><code>bionj</code> (<code>ape</code> library): an improved version of Neighbor-Joining.</p></li>
 <li><p><code>fastme.bal</code> and <code>fastme.ols</code> (<code>ape</code> library): minimum evolution algorithms.</p></li>
 <li><p><code>hclust</code> (<code>stats</code> library): classical hierarchical clustering algorithms including single linkage, complete linkage, UPGMA, and others.</p></li>
 </ul>
 <p>Test these packages for building a US flu data phylogeny and compare your results to that you obtained using <code>nj</code>. (Remember to look up the documentation for each package using e.g. <code>?bionj</code>). How different do your phylogenies look? Are the branches longer/shorter/differently clustered in some methods? See point B below for more formal methods for comparison of trees.</p>
-<p>B. Development of methods for comparison of phylogenetic trees is an active area of research. Investigate the R packages ape and treespace, or look up alternatives, for ways to compare trees, and apply these to your TB/COVID trees. Here is a document about treespace that might be useful <a href="https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html" class="uri">https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html</a></p>
-<p>C. If you are already familiar with phylogenetic inference, but haven’t yet used or made timed trees, you can explore ‘treedater’ (an R package by Erik Volz <a href="https://github.com/emvolz/treedater" class="uri">https://github.com/emvolz/treedater</a>) or the python package TreeTime <a href="https://github.com/neherlab/treetime" class="uri">https://github.com/neherlab/treetime</a> by Richard Neher.</p>
+<p>C. Development of methods for comparison of phylogenetic trees is an active area of research. Investigate the R packages ape and treespace, or look up alternatives, for ways to compare trees, and apply these to your TB/COVID trees. Here is a document about treespace that might be useful <a href="https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html" class="uri">https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html</a></p>
 </div>
 </div>
 
