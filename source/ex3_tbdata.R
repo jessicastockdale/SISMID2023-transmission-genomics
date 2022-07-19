@@ -22,7 +22,7 @@ annot <- as.Date(annot$V1, format="%Y-%m-%d")
 head(annot)
 
 #-----------------------------------------------------------
-##Distance-based phlogenies
+##Distance-based phylogenies
 D <- dist.dna(dna, model = "TN93")
 class(D)
 length(D)
@@ -75,7 +75,7 @@ legend("topright", fill = num2col(temp, col.pal = myPal),
        leg = temp, ncol = 2, cex=0.5)
 
 # is it rooted?
-is.rooted(tre1) # - indeed no, as expected. Should make sure to show this in the plot
+is.rooted(tre1) # - indeed no, as expected. Should make sure to show this in the plot...
 
 plot(tre1, type = "unrooted", show.tip = FALSE)
 title("Unrooted NJ tree for the TB data")
@@ -215,6 +215,6 @@ legend("topright", fill = transp(fac2col(temp, col.pal = myPal),
 
 # The trees look very different I would say. We could further compare them
 # with a package like treespace. Or, we could now continue to do transmission
-# inference with our favourite tree(s). 
+# inference with our favourite tree(s), by timing them first (see extension exercise).  
 
 #-----------------------------------------------------------

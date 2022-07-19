@@ -28,7 +28,7 @@ annot <- as.Date(dates_B113)
 head(annot)
 
 #-----------------------------------------------------------
-##Distance-based phlogenies
+##Distance-based phylogenies
 D <- dist.dna(dna, model = "TN93")
 class(D)
 length(D)
@@ -141,6 +141,8 @@ plot(tre4, cex = 0.6)
 write.phyDat (tre4, file = "HclustTree")
 
 # We can create very different looking trees from different methods!
+# This is likely a result of low diversity in these sequences (a common theme for covid),
+# meaning that small changes in a model have large impact on the trees
 
 #-----------------------------------------------------------
 ## Maximum parsimony
@@ -217,5 +219,5 @@ write.nexus(tre4, file = "ML_covidtree.NEX") # can save tree to file
 
 # The trees look quite different I would say. We could further compare them more
 # precisely with a package like treespace. Or, we could now continue to do transmission
-# inference with our favourite tree(s). 
+# inference with our favorite tree(s), by timing them first (see extension exercise). 
 
