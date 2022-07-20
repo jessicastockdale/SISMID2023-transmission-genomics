@@ -38,7 +38,7 @@ Exercise 2: [Instructions](https://jessicastockdale.github.io/SISMID2022-transmi
 
 Exercise 3: [Data](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/Flu_data.zip), [Instructions](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/Exercise3.html), [Extension exercise](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/h3n2.html), and Solutions: [COVID-19](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/ex3_coviddata.R), [TB](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/ex3_tbdata.R).
 
-Exercise 4: [Instructions](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/Exercise4.html), [TransPhylo Extra Code](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/transphylo_extras.R), and Solutions<!---: [COVID-19](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/ex4_coviddata.R), [TB](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/ex4_tbdata.R)-->.
+Exercise 4: [Instructions](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/Exercise4.html), [TransPhylo Extra Code](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/transphylo_extras.R), and Solutions: [COVID-19](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/ex4_coviddata.R), [TB](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/ex4_tbdata.R).
 
 Data for exercises 2,3,4: [TB data](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/source/TB_data.zip). COVID-19 data will be provided on Slack.
 
@@ -62,7 +62,7 @@ Lecture 5:
 ### Lecture slides
 
 
-[Lecture 1](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/sismid_L1_intro-b-2022.pdf), Lecture 2 [part 1](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/vid2-part1.sozi.html) [part 2](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/vid2-part2.sozi.html), [Lecture 3](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/Nonphylo_recon.pdf), [Lecture 4](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/IntroPhylogeneticsNotes-2022.html), [Lecture 5](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/sismid_L3_transphylomath_2022.pdf)<!---, [Research forefronts](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/SISMID_090721.pdf)-->.
+[Lecture 1](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/sismid_L1_intro-b-2022.pdf), Lecture 2 [part 1](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/vid2-part1.sozi.html) [part 2](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/vid2-part2.sozi.html), [Lecture 3](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/Nonphylo_recon.pdf), [Lecture 4](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/IntroPhylogeneticsNotes-2022.html), [Lecture 5](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/sismid_L3_transphylomath_2022.pdf). <!---, [Research forefronts](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/SISMID_090721.pdf)-->.
 
 ### Resources/reading list
 
