@@ -24,7 +24,7 @@ If you've never used R before, we have created a tutorial for you to work throug
 
 We have also created a short second R tutorial which walks you through installing all of the packages we'll be using during the module. Please work through this in advance of the course. If you have any problems, feel free to drop us a message on Slack. The second tutorial can be accessed here: [Installation and preparation instructions](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/Files/R_tutorial2.html). **Note: everyone should do this one!**
 
-In addition, we ask participants to watch the following Youtube lecture in advance of the course, which provides a short introduction to genomics and genomic data
+In addition, for participants new to genomics and genomic data, we ask you to watch the following Youtube lecture in advance of the course, which provides a short primer on relevant aspects of the field to our course
 <!---{% include youtubePlayer.html id="eLe-AUyaDxY" %} -->
 
 
