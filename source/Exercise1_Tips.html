@@ -12,7 +12,7 @@
 <meta name="author" content="Jessica Stockdale, Caroline Colijn" />
 
 
-<title>Exercise 1: An exploratory introduction to reconstructing paths of transmission</title>
+<title>Exercise 1: Tips</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,69 +349,109 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Exercise 1: An exploratory introduction to
-reconstructing paths of transmission</h1>
+<h1 class="title toc-ignore">Exercise 1: Tips</h1>
 <h4 class="author">Jessica Stockdale, Caroline Colijn</h4>
 
 </div>
 
 
-<div id="foot-and-mouth-disease-in-australian-livestock" class="section level2">
-<h2>Foot and Mouth disease in Australian livestock</h2>
-<p>In your groups, you’ll be exploring an example of the kind of dataset
-we might use for transmission inference. This is a simulated outbreak of
-Foot and Mouth disease in Australian livestock herds.</p>
-<p>This is an open-ended task, and we’re happy for you to approach it
-any way you choose. You could try to recreate the transmission
-network/tree by hand, sketch out a plan or some pseudo-code for an
-automated way to do this, start to code up some analysis, or something
-else entirely. The important thing here is to start thinking about
-possible approaches and difficulties for transmission inference, and how
-we can combine various sources of information to best predict the route
-an outbreak took.</p>
-<p>You have ~1 hour for this exercise. Then, for the final ~20-25
-minutes we will regroup for a wrap-up. At least 1 member of your team
-should be prepared to give a 3 minute summary of your group’s work.</p>
+<div id="getting-genomic-sequences-into-r" class="section level2">
+<h2>Getting genomic sequences into R</h2>
+<p>The <code>ape</code> package has a helpful function for reading
+.fasta sequence files into R.</p>
+<pre class="r"><code>library(ape)
+FMDseq &lt;- read.FASTA(file = &quot;AU-FMD-sequences.fasta&quot;)
+FMDseq</code></pre>
+<pre><code>## 42 DNA sequences in binary format stored in a list.
+## 
+## All sequences of same length: 7667 
+## 
+## Labels:
+## Case_1
+## Case_2
+## Case_3
+## Case_4
+## Case_5
+## Case_6
+## ...
+## 
+## Base composition:
+##     a     c     g     t 
+## 0.253 0.282 0.256 0.209 
+## (Total: 322.01 kb)</code></pre>
+<p>Note that, when we print an individual sequence, it shows numeric
+values rather than a, c, t, g.</p>
+<pre class="r"><code>head(FMDseq$Case_1)</code></pre>
+<pre><code>## [1] 28 28 18 18 28 18</code></pre>
+<p>The <code>ape</code> package has saved the sequences in byte format
+for efficiency. If needed, we can request to print them as
+characters.</p>
+<pre class="r"><code>head(as.character(FMDseq)$Case_1)</code></pre>
+<pre><code>## [1] &quot;c&quot; &quot;c&quot; &quot;t&quot; &quot;t&quot; &quot;c&quot; &quot;t&quot;</code></pre>
 </div>
-<div id="first-steps" class="section level1">
-<h1>First steps</h1>
-<ol style="list-style-type: decimal">
-<li>Introduce yourselves.</li>
-<li>Assign roles from the list below - these don’t have to be formal but
-might help keep things on track.</li>
-<li>Download the data from the main module webpage</li>
-<li>Open up the data (in R, in a text reader, in Excel, wherever you
-prefer)</li>
-<li>Get exploring! The data dictionary file is a good place to
-start.</li>
-</ol>
+<div id="working-with-genomic-sequences-in-r" class="section level2">
+<h2>Working with genomic sequences in R</h2>
+<p>There are many helpful R packages for analyzing genomic
+sequences.</p>
+<pre class="r"><code>library(ape)</code></pre>
+<p>The <code>ape</code> (Analyses of Phylogenetics and Evolution)
+package does more than read in sequences. We can also compute sequence
+distances, plot and manipulate phylogenetic trees, and more. We’ll see
+more from this package later in the module. For now, why not take a look
+at the <code>dist.dna()</code> function for computing distances between
+the FMD sequences. How about <code>image()</code>?</p>
+<pre class="r"><code>library(bioseq)</code></pre>
+<p><code>bioseq</code> is another useful package, specifically for
+sequence manipulation. In contains in-built functions for clustering
+sequences, among other things. Take a look at the
+<code>seq_cluster()</code> function. Note, <code>bioseq</code> requires
+its own sequence format, obtained through
+e.g. <code>as_dna(FMDseq)</code></p>
 </div>
-<div id="roles" class="section level1">
-<h1>Roles:</h1>
-<p>Moderator - helps facilitate the conversation; a “project
-manager”</p>
-<p>Timekeeper - keeps the group on track by being mindful of the time;
-lets everyone know when they need to wrap up or move on</p>
-<p>Note Taker - takes record of the group’s discussion.</p>
-<p>Reporter - when we regroup, the reporter will take the lead in
-summarizing your group’s discussion/progress. (It might be helpful to
-get the note taker to give you their notes!)</p>
-<p>Diagnostician - thinks about the problems and limitations of the
-data/analysis, and how we might combat these.</p>
+<div id="accessing-and-analyzing-epidemiological-data" class="section level2">
+<h2>Accessing and analyzing epidemiological data</h2>
+<p>Remember that we can read in other file types with e.g. </p>
+<pre class="r"><code>FMDepi &lt;- read.csv(&quot;AU-FMD-epidata.csv&quot;)
+head(FMDepi)</code></pre>
+<pre><code>##   herd.name herd.id  latitude longitude   herd.type n.animals day.onset day.dx
+## 1    Case_1  109047 -36.51128  144.8273  pigs large      3209         4     22
+## 2    Case_2  104058 -36.49946  144.9456       dairy       127         8     34
+## 3    Case_3  120734 -36.46383  145.0562       sheep      1235         8     27
+## 4    Case_4   80984 -36.45630  144.9038 mixed sheep      1705         9     26
+## 5    Case_5  103912 -36.37674  144.8036       dairy       213         9     34
+## 6    Case_6  103959 -36.53692  144.7564       dairy       561        10     35
+##   dx.reason day.culling.start
+## 1        TP                25
+## 2       DCP                37
+## 3        SP                29
+## 4        SP                30
+## 5       ARP                37
+## 6       ARP                38</code></pre>
+<p>We could generate plots of this data using our favorite plotting
+commands e.g. with <code>ggplot</code>.</p>
+<p>For the latitude/longitude data, several mapping packages exist in R.
+One such is</p>
+<pre class="r"><code>library(ggmap)</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+## which was just loaded, will retire in October 2023.
+## Please refer to R-spatial evolution reports for details, especially
+## https://r-spatial.org/r/2023/05/15/evolution4.html.
+## It may be desirable to make the sf package available;
+## package maintainers should consider adding sf to Suggests:.
+## The sp package is now running under evolution status 2
+##      (status 2 uses the sf package in place of rgdal)</code></pre>
+<pre><code>## ℹ Google&#39;s Terms of Service: &lt;https://mapsplatform.google.com&gt;
+## ℹ Please cite ggmap if you use it! Use `citation(&quot;ggmap&quot;)` for details.</code></pre>
+<p>Although note, you will need to obtain a (free) Google API <a href="https://mapsplatform.google.com/" class="uri">https://mapsplatform.google.com/</a>.</p>
 </div>
-<div id="key-questions-you-might-ask" class="section level1">
-<h1>Key questions you might ask</h1>
-<ul>
-<li>You have several pieces of information available to you about each
-infected herd. Which are more/less informative? How should we combine
-them? How should we weight them?</li>
-<li>How could we visualize the data, and the inferred chains of
-transmission?</li>
-<li>What are the strengths of this approach, and in what ways are we
-limited?</li>
-<li>What other information would be helpful for inferring
-transmission?</li>
-</ul>
+<div id="combining-the-above" class="section level2">
+<h2>Combining the above</h2>
+<p>You may want to consider how we could write a mathematical expression
+to combine these different sources of information (genomic distance,
+geographic location, times, …) so as to ascertain the most likely
+infectors of each herd. This will be the focus of much of this
+module.</p>
 </div>
 
 

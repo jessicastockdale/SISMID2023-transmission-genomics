@@ -1,5 +1,5 @@
 ---
-title: "Exercise 2: Computational methods for outbreak reconstruction"
+title: "Exercise 2: 'outbreaker2' for outbreak reconstruction"
 author: "Jessica Stockdale, Caroline Colijn"
 output: html_document
 ---
@@ -10,18 +10,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Reconstructing transmission pathways
 
-In this exercise we will use the first of several R packages for reconstructing transmission pathways. Before starting this exercise make sure you have watched the video for ‘Non-phylogenetic transmission reconstruction’ in which we introduce outbreaker2. 
+In this exercise we will use the first of several R packages for reconstructing transmission pathways. This will be `outbreaker2', as introduced in the previous lecture. 
 
 ## Introduction: getting started
 
 1. First, load up the packages we will need for this tutorial and set the seed (so that if you repeat this analysis you'll get the same output).
 
 ```{r, message=FALSE}
-library(ape)
-library(outbreaker2)
-library(Hmisc)
-library(lubridate)
-library(EpiEstim)
+library(ape) # reading, manipulating sequences
+library(outbreaker2) # the main reconstruction package
+library(Hmisc) # general data science package - we use for dealing with dates
+library(lubridate) # also for dealing with dates
+library(EpiEstim) # primarily a package for estimation of reproduction numbers. We want a small function for defining our generation time
 set.seed(1) # You can put whatever number you want into the set.seed function
 ```
 
@@ -60,7 +60,7 @@ class(result) # the results are stored in a type of data.frame called outbreaker
 result
 ```
 
-Each row of `result` contains a single step from the MCMC chain, that is, a single sample of each parameter. At each step, `result` returns the value of the log posterior distribution `post`, the log likelihood `like`, the log prior `prior`, and all parameters/augmented data. The inferred sampled ancestor `alpha`, date of infection `t_inf` and number of generations between the case and their sampled ancestor `kappa` of each case in the outbreak is also reported at each step. (`str(result`) will show you all elements of `result`).
+Each row of `result` contains a single step from the MCMC chain, that is, a single sample of each parameter. At each step, `result` returns the value of the log posterior distribution `post`, the log likelihood `like`, the log prior `prior`, and all parameters/augmented data. The inferred sampled ancestor `alpha`, date of infection `t_inf` and number of generations between the case and their sampled ancestor `kappa` of each case in the outbreak is also reported at each step. (`str(result)` will show you all elements of `result`).
 
 ## Introduction: Analysis and visualization of results from the fake outbreak
 
@@ -74,17 +74,20 @@ One way to do this is to look at trace plots of the MCMC chain
 plot(result)
 ```
 
-You should see something like this, a transient stage at the very start of the chain followed by something bumpy but relatively stable. If you used a different seed than me, your trace plot will look a bit different: that's ok. We used 10,000 iterations here, but in a full analysis we would use more to minimize the effect of the seed on the results. 
+You should see something like this, a transient stage at the very start of the chain followed by something bumpy but relatively stable. If you used a different seed than me, your trace plot will look a bit different: that's ok. We used 10,000 iterations here, but in a full analysis we would use more, in part to minimize the effect of the seed on the results. 
 
 6. You can also use `plot` to get trace plots of any other column in `result`. Try a few with e.g. `plot(result, "prior")`, `plot(result, "t_inf_29")`...
 
 ```{r}
+plot(result, "prior")
 plot(result, "t_inf_29")
 ```
 
-That transient stage we saw at the beginning of the posterior trace plot is undesirable to include in our results because it represents a chain which has not yet converged. We can discard that stage from our trace plot by defining a burn-in.
+"t_inf_29" (the time of infection of case 29) doesn't look so well mixed - we can see discrete jumps between different states. This is in part because the algorithm might not update 29's infection time at each iteration - this may be a necessary compromise for computation time's sake. It suggests to me I should run more iterations though, before trusting my results too much. 
 
-There's no fixed rule about how big a burn-in to use, but in general we want to keep as many samples as we can whilst removing that un-converged stage. It is often said that we want to make the trace plot look like a 'fuzzy caterpillar'!   
+That transient stage we saw at the beginning of the posterior trace plot is also undesirable to include in our results, because it represents a chain which has not yet converged. We can discard that stage from our trace plot by defining a 'burn-in' - this is, we throw away the first `x` iterations.
+
+There's no fixed rule about how big a burn-in `x` to use, but in general we want to keep as many samples as we can whilst removing that un-converged stage. It is often said that we want to make the trace plot look like a 'fuzzy caterpillar'!   
 
 7. Plot the posterior trace plot without the burn-in stage. (We probably needed more iterations in the MCMC to get a true fuzzy caterpillar, but maybe you can see how this is caterpillar-like).
 
@@ -92,7 +95,7 @@ There's no fixed rule about how big a burn-in to use, but in general we want to 
 plot(result, burnin = 1000)
 ```
 
-Ok, so it looks like our MCMC mixed well and therefore we can probably trust our results. So let's visualize the transmission we inferred. 
+Ok, so it looks like our MCMC mixed fairly well, and therefore we can continue to get some preliminary results. If this were a real analysis, I would still want to run more iterations, but this can be time consuming. So, let's visualize the transmission we inferred. 
 
 8. First, plot the distribution of the parameters we estimated: mutation rate `mu`, reporting probability `pi`, contact reporting coverage `eps` and non-infectious contact rate `lambda`. Remember to remove the burn-in.
 
@@ -101,6 +104,7 @@ Ok, so it looks like our MCMC mixed well and therefore we can probably trust our
 plot(result, "mu", type="hist", burnin = 1000)
 plot(result, "mu", type="density", burnin = 1000) # and so on for the other parameters
 ```
+
 The `plot` command will recognize various `type=` arguments for plotting `outbreaker_chains` objects. We've just seen "hist" and "density", and now we explore some others. 
 
 9. Next, visualize the inferred ancestries and transmission network. Remember your burn-in!
@@ -133,7 +137,7 @@ This summary provides:
 
 ## Your own analysis: TB and COVID-19
 
-We have 2 datasets prepared for you to work with in this exercise, and we will also be revisiting them in later exercises. You may well not have time to finish working on both datasets by the end of this session: that's ok! Feel free to keep working on them later (or during the open work sessions), and post any questions on Slack.
+We have 2 datasets prepared for you to work with in this exercise, and we will also be revisiting them in later exercises. You may well not have time to finish working on both datasets by the end of this session: that's ok! Feel free to keep working on them later, and post any questions on Slack.
 
 1. Download the tuberculosis dataset from the module webpage and/or the COVID-19 dataset from the Slack channel.
 
@@ -164,7 +168,7 @@ dates <- as.Date(dates[,1])
 dates<-(year(dates) - 1997)*12 + month(dates) + day(dates)/monthDays(dates) # convert to number of months since the start of 1997
 ```
 
-2d) The last data aspect to define is generation time `w_dens` and colonization time distribution `f_dens`, also on a monthly scale for the TB data and a daily scale for the COVID data. There is a script to help you with this in the exercise 2 section of the module webpage (wf_distribution.R).
+2d) The last data aspect to define is generation time `w_dens` and colonization time distribution `f_dens`, also on a monthly scale for the TB data and a daily scale for the COVID data. There is a script to help you with this in the exercise 2 section of the module webpage [wf_distribution.R](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/source/wf_distribution.R).
 
 ## Hints, tips and common issues: 
 
