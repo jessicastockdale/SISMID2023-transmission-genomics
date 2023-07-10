@@ -26,6 +26,8 @@ dates <- decimal_date(as.Date(metadata))
 
 # Plot the phylogeny
 plot(ph)
+ph <- ladderize(ph) # ladderize it
+plot(ph)
 # We convert the phylogeny to a ptree object and plot it, aligning the time
 ptree <- ptreeFromPhylo(ph,dateLastSample=(max(dates)))
 plot(ptree)

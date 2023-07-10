@@ -30,6 +30,8 @@ sum(ph$edge.length<0) # no! good news, we don't need to do anything
 # we see that this phylogeny is quite 'short', since all the genomes were sampled at a 
 # similar time and have low diversity. 
 plot(ph)
+ph <- ladderize(ph) # ladderize it
+plot(ph)
 # We convert the phylogeny to a ptree object and plot it, aligning the time
 ptree <- ptreeFromPhylo(ph,dateLastSample=length_time)
 plot(ptree)
