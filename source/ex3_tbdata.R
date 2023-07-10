@@ -107,7 +107,7 @@ mutFromRoot <- as.matrix(dist.dna(dna, model="N"))[1,]
 yearsFromRoot <- (annot-annot[which.min(annot)])/365
 # (this will be slightly off because not all years are 365 days - but close enough!)
 plot(mutFromRoot~yearsFromRoot, xlab="Years from the root",
-     ylab="Mutations from the root", main="US flu data molecular clock")
+     ylab="Mutations from the root", main="TB data molecular clock")
 
 # Then we perform a regression of these quantities, and add to the plot. 
 mclock <- lm(mutFromRoot~-1+yearsFromRoot)

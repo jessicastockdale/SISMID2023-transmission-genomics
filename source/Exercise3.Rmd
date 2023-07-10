@@ -6,7 +6,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "C:/Users/jesto/sfuvault/SISMID/SISMID2022/Flu_data")
+knitr::opts_knit$set(root.dir = "C:/Users/jesto/sfuvault/SISMID/SISMID2023/Flu_data")
 ```
 
 # Reconstructing phylogenetic trees
@@ -63,10 +63,9 @@ Task (i): compute distances.
 D <- dist.dna(seqs, model = "TN93")
 length(D) # D is of length (80*80/2 - 80) i.e. it contains the distance from each sequence to every other sequence.
 ```
-Here I chose the TN93 (Tamura and Nei 1993) model which allows for: different rates of transitions (A↔G or C↔T) and transversions (all other base pair mutations), unequal base frequencies (e.g. the proportion of A is not equal to the proportion of T), and between-site variation in the rate at which substitutions occur. Choice of evolutionary model is unfortunately beyond the scope of this module, but a good resource is  [here](https://www.kuleuven.be/aidslab/phylogenybook/firstEdition/Chapter10.pdf). Please feel free to ask us about this in the Q&A sessions if you wish. 
+Here I chose the TN93 (Tamura and Nei 1993) model which allows for: different rates of transitions (A↔G or C↔T) and transversions (all other base pair mutations), unequal base frequencies (e.g. the proportion of A is not equal to the proportion of T), and between-site variation in the rate at which substitutions occur. Choice of evolutionary model is unfortunately beyond the scope of this module, but a good resource is  [The Phylogenetic Handbook, chapter 10](https://doi.org/10.1017/CBO9780511819049). 
 
-In practice, a model such as TN93, which is fairly simple but still flexible (varying transition/transversion rates, unequal base frequencies and between-site substitution rate variation), will usually be a good choice. You could try re-running this analysis with different evolutionary models to see how much impact it has on your trees.  
-
+In practice, a model such as TN93, which is fairly simple but still flexible (varying transition/transversion rates, unequal base frequencies and between-site substitution rate variation), will often be a good choice. You could try re-running this analysis with different evolutionary models to see how much impact it has on your trees.  
 
 Visualizing and summarizing the distance matrix D can be a difficult task, particularly if you have a large number of sequences. We don't have too many sequences, so a heatmap of pairwise distances shouldn't be too bad.
 
@@ -88,7 +87,7 @@ We can see some kind of genetic structure from the heatmap (patches of red, oran
 
 Task (ii): build trees. 
 
-Phylogenetic trees help us to understand the genetic distance between samples, as well as the overall structure of a set of samples. However, they are still involve simplification of the rich information contained within sequences and therefore some information will, in practice, always be lost in translation. There are also many different approaches for building trees, and in all but the simplest case you will get a different answer depending on which method you use. 
+Phylogenetic trees help us to understand the genetic distance between samples, as well as the overall structure of a set of samples. However, they still involve simplification of the rich information contained within sequences and therefore some information will, in practice, always be lost in translation. There are also many different approaches for building trees, and in all but the simplest case you will get a different answer depending on which method you use. 
 
 6. Build and plot a phylogenetic tree for the US flu data using the ``nj`` (Neighbour-Joining) algorithm in the ``ape`` package.
 
@@ -164,7 +163,7 @@ legend("topright", fill = num2col(temp, col.pal = myPal),
 
 ```
 
-Now that the tree is rooted we can think of the left-hand side as 'ancestral' and the right side as more 'recent'. 
+Now that the tree is rooted we can think of the left side as 'ancestral' and the right side as 'recent'. 
 
 There are a wide range of other approaches than ``nj`` available for building phylogenetic trees in R. If you get time, check out the extension tasks section below to explore several of these alternatives. 
 
@@ -196,21 +195,21 @@ mclock$coefficients/ncol(seqs)
 365/mclock$coefficients
 ```
 
-The coefficient of `yearFromRoot` is ~7.7. This is our estimate of the number of substitutions per year for the HA segment of the H3N2 influenza genomes. What is the substitution rate per site per year? Therefore, how many days would you expect it to take to accumulate 1 mutation in a transmission chain? Lastly, given your answer to the previous question and the fact that the generation time of influenza is 2-3 days, do you think that reconstructing influenza transmission trees from HA sequences is a good approach?
+The coefficient of `yearFromRoot` is ~7.7. This is our estimate of the number of substitutions per year for the HA segment of the H3N2 influenza genomes. Use this result to answer the following questions:
+
+- What is the substitution rate per site per year? 
+- Therefore, how many days would you expect it to take to accumulate 1 mutation in a transmission chain? 
+- Given your answers above and the fact that the generation time of influenza is 2-3 days, do you think that reconstructing influenza transmission trees from HA sequences is a good approach?
 
 ## Introduction: maximum parsimony phylogenies
 
-An alternative to distance-based phylogenies is maximum parsimony phylogenies.
+An alternative to a distance-based phylogeny is a maximum parsimony phylogeny.
 
-In general terms, the scientific principle of parsimony can be described as a belief that the best explanation of your data is equal to the simplest possible explanation that is consistent with that data. Maximum parsimony phylogenetic reconstruction therefore seeks trees which minimize the number of evolutionary changes (substitutions) between ancestor and descendant. This makes for a simple and easy-to-motivate methodology, which is most appropriate for sequences with low divergence i.e. most sequences are very similar to one another.  
+In general terms, the scientific principle of parsimony can be described as a belief that the best explanation of your data is equal to the simplest possible explanation that is consistent with that data. Maximum parsimony phylogenetic reconstruction therefore seeks trees that minimize the number of evolutionary changes (substitutions) between ancestor and descendant. This makes for a simple and easy-to-motivate methodology, that is most appropriate for sequences with low divergence i.e. most sequences are very similar to one another.  
 
-In an ideal world we would search over the space of all possible trees to find the one which is most parsimonious. However, in reality this is usually computationally impossible unless you have very few tips in your tree. Many algorithms have been designed to instead search broadly over this space in a clever way - to try and find a decently parsimonious tree without needing to check too many. These algorithms generally take a strategy of (1) pick an initial tree and calculate it's parsimony, (2) propose some small changes to the tree and calculate the new tree's parsimony, (3) keep the new tree if it leads to a better parsimony, and (4) repeat until the parsimony score stops improving. 
+In an ideal world we would search over the space of all possible trees to find the one which is most parsimonious. However, in reality this is usually computationally impossible unless you have very few tips in your tree. Many algorithms have been designed to instead search broadly over this space in a clever way - to try and find a decently parsimonious tree without needing to check them all. These algorithms generally take a strategy of (1) pick an initial tree and calculate it's parsimony, (2) propose some small changes to the tree and calculate the new tree's parsimony, (3) keep the new tree if it leads to a better parsimony, and (4) repeat until the parsimony score stops improving. 
 
-
-Parsimony-based phylogenetic reconstruction is implemented in the package
-phangorn. It requires a tree (in ape's format, i.e. a phylo object) and the
-original DNA sequences in phangorn's own format, phyDat. We convert the
-data and generate a tree to initialize the method:
+Parsimony-based phylogenetic reconstruction is implemented in the package ``phangorn``. It requires a tree (in ape's format, i.e. a phylo object) and the original DNA sequences in ``phangorn``'s own format, ``phyDat``. We convert the data and generate a tree to initialize the method:
 
 10. Create a maximum parsimony tree for the US flu data using the package ``phangorn``. This requires an initial tree (you can use ``ape`` to make a neighbor-joining tree for this, as in the previous section) as well as the original DNA sequences, which must be converted to ``phangorn``'s ``phyDat`` format, as follows:
 
@@ -231,7 +230,7 @@ tree_parsim <- optim.parsimony(tree_init, seqs2)
 tree_parsim 
 ```
 
-The tree we get out will be unrooted without branch lengths. Here we find that the parsimony of the final tree is not much lower than the ``nj`` tree we started with, but that won't always be the case. We can think of this as the methods (``nj`` and ``optim.parsimony``) relatively well agreeing on the best tree, which tends to happens for datasets with low divergence as we have here. 
+The tree we get out will be unrooted without branch lengths. Here we find that the parsimony of the final tree is not much lower than the ``nj`` tree we started with, but that won't always be the case. We can think of this as the methods (``nj`` and ``optim.parsimony``) relatively well agreeing on the best tree, which tends to happen for datasets with low divergence. As we have here! 
 
 11. Plot your maximum parsimony tree (same approach as for the ``nj`` trees).
 
@@ -248,11 +247,11 @@ legend("topright", fill = transp(num2col(temp, col.pal = myPal),
 
 ## Introduction: maximum likelihood phylogenies
 
-Our final phylogenetic tree building approach is maximum likelihood. The idea here is very similar to maximum parsimony, in that we try to search over the space of all possible trees in a smart way to find the 'best' one, but this time we want to maximize some pre-defined likelihood function rather than maximizing parsimony.
+Our final phylogenetic tree building approach is maximum likelihood. The idea here is very similar to maximum parsimony, in that we try to search over the space of all possible trees in a smart way to find the 'best' one. Except, this time we want to maximize some pre-defined likelihood function rather than maximizing parsimony.
 
-A big benefit of this approach is that the likelihood to be maximized can be defined by any model of sequence evolution we choose, which makes it much more flexible. As well as optimizing over the space of trees, we can also simultaneously optimize over the parameters of our chosen model - to find the best tree and the best model parameters at the same time. A drawback, however, is that this means we need to decide what is the most appropriate model to use!
+A big benefit of this approach is that the likelihood to be maximized can be defined by any model of sequence evolution we choose, which makes it much more flexible. As well as optimizing over the space of trees, we can also simultaneously optimize over the parameters of our chosen model - to find the best tree and the best model parameters at the same time. A drawback, however, is that this means we need to decide what is the most appropriate model to use.
 
-A common choice is the GTR + $\Gamma$(4) model (GTR = global reversible time). In this model, all possible substitutions (all transitions, transversions) are allowed to have different rates as well as the substitution rate being allowed to vary across sites. 
+A common choice is the GTR + $\Gamma$(4) model (GTR = global reversible time). In this model, all possible substitutions (all transitions, transversions) are allowed to have different rates as well as the substitution rate being allowed to vary across sites. It is therefore a very flexible model. 
 
 Like maximum parsimony, maximum likelihood tree reconstruction can be performed with the ``phangorn`` package. Again, we require an initial tree and the DNA sequences. 
 
@@ -269,12 +268,12 @@ tree_init <- nj(dist.dna(seqs, model = "TN93"))
 pml(tree_init, seqs2, k = 4)
 ```
 
-At this point, you may notice that the likelihood of your initial tree is `NaN`. This needs to be fixed, but isn't a big problem. It is caused by missing data (missing or error bases) in our original sequences. So, we should remove them before continuing (even if you didn't get `NaN` likelihood you should remove them so they aren't a problem later!). 
+At this point, you may notice that the likelihood of your initial tree is `NaN`. This needs to be fixed, but isn't a big problem. It is caused by missing data (missing or error bases) in our original sequences. So, we should remove them before continuing (even if you didn't get a `NaN` likelihood, you should remove them so they aren't a problem later!). 
 
 13. Find the location of the missing bases in the data. Plot them, and remove them. 
 
 ```{r}
-# First, find the location of the missing/incorrect bases (anything which isn't a,t,g,c)
+# First, find the location of the missing/incorrect bases (anything that isn't a,t,g,c)
 na.posi <- which(apply(as.character(seqs), 2, function(e) any(!e %in%
                                                                  c("a", "t", "g", "c"))))
 na.posi
@@ -301,22 +300,22 @@ It turns out most of the missing bases are towards the beginning of the alignmen
 
 Now we're ready to search for a maximum likelihood tree.
 
-14. Find a maximum likelihood phylogeny for the US flu data, using ``optim.pml``. Remember to find a new initial tree, using your new sequences with missing data removed. 
+14. Find a maximum likelihood phylogeny for the US flu data, using ``optim.pml``. Remember to start with a new initial tree, using your new sequences with missing data removed. 
 
 ```{r}
 #Make the initial tree
 tree_init <- nj(dist.dna(seqs3, model = "TN93"))
-#Find it's (log) likelihood
+#Find its (log) likelihood
 lh_init <- pml(tree_init, seqs4, k = 4)
 lh_init
 
 # Find the max. likelihood tree. We optimize the tree (optNni = TRUE), the base frequencies (optBf=TRUE), the substitution rates (optQ=TRUE) and assume a gamma distribution for the variation in substitution rates across sites (optGamma = TRUE).
 fit <- optim.pml(lh_init, optNni = TRUE, optBf = TRUE, optQ = TRUE, optGamma = TRUE)
 fit
-names(fit) # what are the components of the results object
+names(fit) # what are the components of the results object?
 ```
 
-The results object (here named ``fit``) contains not just the optimal tree (``fit$tree``), but also other useful info - explore these.  
+The results object (here named ``fit``) contains not just the optimal tree (``fit$tree``), but also other useful info. Take some time to explore these.  
 
 Before choosing this as our favourite maximum likelihood tree, we can confirm that the optimized tree is better than the initial one using ANOVA and AIC:
 
@@ -347,13 +346,13 @@ legend("topright", fill = transp(num2col(temp, col.pal = myPal),
 
 ```
 
-Overall, we find that for this dataset all methods return fairly similar trees. This dataset is relatively simple, with not too many samples and low diversity, so this is not unexpected. For larger and more complex datasets, you will likely find much more stark differences between different methods. It's usually a good idea to test out a few different tree building approaches before drawing any conclusions about your data. 
+Overall, we find that for this data set, all methods return fairly similar trees. Our data is relatively simple, with few samples and low diversity, so this is not unexpected. For larger and more complex data, you will likely find much more stark differences between different methods. It's usually a good idea to test out a few different tree building approaches before drawing any conclusions about your data. 
 
 **How do we choose between methods?**
 
 - **Distance based methods.** *Pros:* the fastest method, and fairly flexible too (can use different distance measures). *Cons:* no real way to compare between different distance-based methods and find the 'best'.
 
-- **Maximum parsimony.** *Pros:* intuitive, works well for datasets with small amounts of genetic variation. *Cons:* simplistic evolutionary model, computationally intensive, works poorly for datasets with large amounts of genetic variation or where mutation rates vary across the tree. 
+- **Maximum parsimony.** *Pros:* intuitive, works well for data with small amounts of genetic variation. *Cons:* simplistic evolutionary model, computationally intensive, works poorly for data with large amounts of genetic variation or where mutation rates vary across the tree. 
 
 - **Maximum likelihood.** *Pros:* very flexible - can use any model of evolution, can perform model selection, usually works well. *Cons:* computationally intensive.
 
@@ -366,7 +365,7 @@ A popular branch of methods for tree reconstruction that we have not covered her
 - Try building phylogenies using different methods, as in step 1. 
 - How different do the phylogenies look?
 
-Remember that we don't expect you to finish the whole tutorial for all 3 datasets within one 50 minute session. But hopefully you can make a good start, ask lots of questions, and then continue in the open work sessions or outside of our schedule if you want to. 
+Remember that we don't expect you to finish the whole tutorial for all 3 datasets within this single time slot. But hopefully you can make a good start, ask lots of questions, and then continue later if you want to. 
 
 
 ## Extension tasks and additional reading
@@ -384,7 +383,7 @@ single linkage, complete linkage, UPGMA, and others.
 
 Test these packages for building a US flu data phylogeny and compare your results to that you obtained using ``nj``. (Remember to look up the documentation for each package using e.g. ``?bionj``). How different do your phylogenies look? Are the branches longer/shorter/differently clustered in some methods? See point B below for more formal methods for comparison of trees. 
 
-C. Development of methods for comparison of phylogenetic trees is an active area of research. Investigate the R packages ape and treespace, or look up alternatives, for ways to compare trees, and apply these to your TB/COVID trees. Here is a document about treespace that might be useful  https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html
+C. Development of methods for comparison of phylogenetic trees is an active area of research. Investigate the R packages ape and treespace, or look up alternatives, for ways to compare trees, and apply these to your TB/COVID trees. Here is a document about treespace: https://cran.r-project.org/web/packages/treespace/vignettes/introduction.html
 
 
 

@@ -101,7 +101,7 @@ mutFromRoot <- as.matrix(dist.dna(dna, model="N"))[1,]
 # How many DAYS passed between each tip and the root? We need to do some date converting
 daysFromRoot <- annot-annot[which.min(annot)]
 plot(mutFromRoot~daysFromRoot, xlab="Days from the root",
-     ylab="Mutations from the root", main="US flu data molecular clock")
+     ylab="Mutations from the root", main="COVID data molecular clock")
 
 # Then we perform a regression of these quantities, and add to the plot.
 mclock <- lm(mutFromRoot~-1+daysFromRoot)
