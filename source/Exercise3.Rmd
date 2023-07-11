@@ -331,10 +331,13 @@ AIC(fit)
 
 Indeed, ANOVA has a good p-value and the AIC of the new tree is better than the initial one. Great news! We have obtained an improved tree. 
 
-14. Lastly, plot your maximum likelihood phylogeny for the US flu data (just like for the other methods).
+14. Lastly, plot (and save) your maximum likelihood phylogeny for the US flu data (just like for the other methods).
 
 ```{r}
 tree_ml <- root(fit$tree, 1)
+write.tree(tree_ml, file = "myflutree.nwk")
+
+
 plot(tree_ml, show.tip = FALSE, edge.width = 2)
 title("Maximum-likelihood tree for US flu data")
 tiplabels(meta$year, bg = transp(num2col(meta$year, col.pal = myPal),
