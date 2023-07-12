@@ -33,7 +33,7 @@ dater(tree, samps, s)
 ```
 where `samps` is a vector containing the sampling time of each tip, and `s` is the length of the genetic sequences. Note, `samps` should be a named vector matching the tip names in `tree`.
 
-# A timed phylogemny for the US flu data
+## A timed phylogeny for the US flu data
 We will read in our maximum likelihood tree for the US flu data, and by adding in the sampling dates build a timed phylogeny.
 
   
@@ -127,7 +127,9 @@ This test indicates a relaxed clock is preferred.
 
 There is more that can be done with the `treedater` package. It is possible to estimate confidence intervals around the inferred dates and rates, using a parametric or nonparametric bootstrap. It is also possible to put uncertainty around the sampling times when they are only known e.g. to nearest month or year. This is exactly the case we had here, with only years known, and so would be a good extension to the work above. See the `treedater` documentation for more information about how to do this.
 
-If you have time, you could try now building timed phylogenies for the TB and COVID-19 data. In exercise 4, we will be using timed trees to reconstruct transmission. We will be providing these timed trees for you, but if you get this far you could see how different your timed `treedater` trees are from those we provide. 
+# Next steps
+
+If you have time, try building timed phylogenies for the TB and COVID-19 data. In exercise 4, we will be using timed trees to reconstruct transmission. We will be providing these timed trees for you, but if you get this far you could see how different your timed `treedater` trees are from those we provide. 
 
 
 

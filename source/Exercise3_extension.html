@@ -360,12 +360,13 @@ dating with ‘treedater’</h1>
 <li><a href="#building-phylogenetic-trees-for-transmission-reconstruction" id="toc-building-phylogenetic-trees-for-transmission-reconstruction"><span class="toc-section-number">1</span> Building phylogenetic trees for
 transmission reconstruction</a></li>
 <li><a href="#a-brief-introduction-to-building-timed-phylogenies" id="toc-a-brief-introduction-to-building-timed-phylogenies"><span class="toc-section-number">2</span> A brief introduction to building
-timed phylogenies</a></li>
-<li><a href="#a-timed-phylogemny-for-the-us-flu-data" id="toc-a-timed-phylogemny-for-the-us-flu-data"><span class="toc-section-number">3</span> A timed phylogemny for the US flu
-data</a>
+timed phylogenies</a>
 <ul>
-<li><a href="#outliers" id="toc-outliers"><span class="toc-section-number">3.1</span> Outliers</a></li>
+<li><a href="#a-timed-phylogeny-for-the-us-flu-data" id="toc-a-timed-phylogeny-for-the-us-flu-data"><span class="toc-section-number">2.1</span> A timed phylogeny for the US flu
+data</a></li>
+<li><a href="#outliers" id="toc-outliers"><span class="toc-section-number">2.2</span> Outliers</a></li>
 </ul></li>
+<li><a href="#next-steps" id="toc-next-steps"><span class="toc-section-number">3</span> Next steps</a></li>
 </ul>
 </div>
 
@@ -422,10 +423,9 @@ object) with the command</p>
 each tip, and <code>s</code> is the length of the genetic sequences.
 Note, <code>samps</code> should be a named vector matching the tip names
 in <code>tree</code>.</p>
-</div>
-<div id="a-timed-phylogemny-for-the-us-flu-data" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> A timed phylogemny for
-the US flu data</h1>
+<div id="a-timed-phylogeny-for-the-us-flu-data" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> A timed phylogeny for
+the US flu data</h2>
 <p>We will read in our maximum likelihood tree for the US flu data, and
 by adding in the sampling dates build a timed phylogeny.</p>
 <pre class="r"><code>library(treedater)</code></pre>
@@ -525,8 +525,9 @@ for practice.</p>
 clock-like process. There are no clear outliers in the plot (deviations
 from the x=y diagonal), but lets continue to check for them for
 practice.</p>
-<div id="outliers" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Outliers</h2>
+</div>
+<div id="outliers" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Outliers</h2>
 <p><code>treedater</code> has in-built functions for outlier detection
 and removal. The <code>outlierTips</code> function looks for tips that
 do not provide a good fit to the molecular clock model.</p>
@@ -616,7 +617,7 @@ axisPhylo()</code></pre>
 ## Tree is rooted. Not estimating root position.
 ## Initial guesses of substitution rate: 0.00501404853858919,0.00510823510970408,0.00524040671861036,0.0053469323081938,0.00546676489863153,0.00558562950668352 
 ## Best clock model:  uncorrelated 
-## Null distribution of rate coefficient of variation: 3.53028158873483e-11 1.39173900864107e-06 
+## Null distribution of rate coefficient of variation: 7.44892208966596e-12 1.0376194684329e-06 
 ## Returning best treedater fit</code></pre>
 <p>This test indicates a relaxed clock is preferred.</p>
 <p>There is more that can be done with the <code>treedater</code>
@@ -627,12 +628,15 @@ they are only known e.g. to nearest month or year. This is exactly the
 case we had here, with only years known, and so would be a good
 extension to the work above. See the <code>treedater</code>
 documentation for more information about how to do this.</p>
-<p>If you have time, you could try now building timed phylogenies for
-the TB and COVID-19 data. In exercise 4, we will be using timed trees to
+</div>
+</div>
+<div id="next-steps" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Next steps</h1>
+<p>If you have time, try building timed phylogenies for the TB and
+COVID-19 data. In exercise 4, we will be using timed trees to
 reconstruct transmission. We will be providing these timed trees for
 you, but if you get this far you could see how different your timed
 <code>treedater</code> trees are from those we provide.</p>
-</div>
 </div>
 
 
