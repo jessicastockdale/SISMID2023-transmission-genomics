@@ -57,7 +57,7 @@ Here you will be able to download the lecture slides.
 
 ### Resources/reading list
 
-<!---For a list of papers/websites/books we either mentioned during the course or just think you might find interesting, check out the [resources list](https://jessicastockdale.github.io/SISMID2022-transmission-genomics/Files/Resources_list.pdf).-->
+For a list of papers/websites/books we either mentioned during the course or just think you might find interesting, check out the [resources list](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/Files/Resources_list.pdf)
 
 ### Contact
 
