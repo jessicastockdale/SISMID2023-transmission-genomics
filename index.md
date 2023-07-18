@@ -56,7 +56,7 @@ Here you will be able to download the lecture slides.
 
 [Lecture 3](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/Files/IntroPhylogeneticsNotes-2023.html)
 
-[Lecture 4](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/Files/sismid_L3_transphylomath_2022.pdf)
+[Lecture 4](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/Files/sismid_L3_transphylomath_2023.pdf)
 
 <!---
 [Lecture 5](https://jessicastockdale.github.io/SISMID2023-transmission-genomics/Files/L5-RF.pdf)
